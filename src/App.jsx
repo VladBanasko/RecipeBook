@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <h1>recipeBook</h1>
+      <h1>recipeBook 2</h1>
     </>
   )
 }

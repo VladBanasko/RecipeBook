@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <h1>recipeBook asd2</h1>
+      <h1>recipeBook</h1>
     </>
   )
 }

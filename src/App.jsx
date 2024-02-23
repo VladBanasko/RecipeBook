@@ -1,16 +1,22 @@
 import { useState } from 'react'
 
+
 import './App.css'
-import Navbar from './components/Navbar'
+
+import CardTile from './components/CardTile'
+import NavbarTile from './components/NavbarTile'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-    <>
-      <Navbar />
 
+    <>
+      <NavbarTile />
+      <CardTile />
     </>
+
   )
 }
 

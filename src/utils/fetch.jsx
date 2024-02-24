@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
+
 
 const options = {
   method: 'GET',
@@ -12,15 +14,33 @@ const options = {
   }
 };
 
-// fix axios 429 error
 
-const FetchData = async () => {
-  try {
-    const response = await axios.request(options);
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
+
+const useFetchData = () => {
+
+  const [list, setList] = useState([])
+
+  const getData = async () => {
+    try {
+      const response = await axios.request(options);
+      const results = response.data.map((item) => {
+        // console.log(item);
+        const { title, ingredients, instructions, servings } = item
+        return { title, ingredients, instructions, servings }
+      })
+      // console.log(results);
+      setList(results)
+
+      // console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   }
+
+  useEffect(() => {
+    getData();
+  }, []);
+  return { list }
 }
-export default FetchData
+export default useFetchData
 

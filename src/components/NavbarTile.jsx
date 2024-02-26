@@ -2,14 +2,13 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@n
 
 const NavbarTile = () => {
   return (
-    <Navbar shouldHideOnScroll>
-      <NavbarBrand>
-
-        <p className="font-bold text-inherit">RecipeBook</p>
+    <Navbar shouldHideOnScroll >
+      <NavbarBrand >
+        <p className="font-bold text-inherit max-w-fit">RecipeBook</p>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-4" justify='center'>
         <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+          <Link href="/" aria-current="page" color="foreground">
             All
           </Link>
         </NavbarItem>
@@ -19,12 +18,12 @@ const NavbarTile = () => {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
+          <Link color="foreground" href="/about">
+            About
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify="end">
+      {/* <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
           <Link href="#">Login</Link>
         </NavbarItem>
@@ -33,7 +32,7 @@ const NavbarTile = () => {
             Sign Up
           </Button>
         </NavbarItem>
-      </NavbarContent>
+      </NavbarContent> */}
     </Navbar>
 
   )

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { About, HomeLayout, Error, Landing, Recipe } from './pages'
+
 import './App.css'
 
 import CardTile from './components/CardTile'
@@ -7,10 +9,34 @@ import NavbarTile from './components/NavbarTile'
 import useFetchData from './utils/fetch'
 import axios from 'axios';
 import CardList from './components/CardList'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <HomeLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        index: true,
+        element: <Landing />
+      },
+      {
+        path: 'recipe',
+        element: <Recipe />
+      },
+      {
+        path: 'about',
+        element: <About />
+      },
+    ]
+  },
+
+])
 
 function App() {
 
-  const { list } = useFetchData()
+  // const { list } = useFetchData()
 
 
   // const options = {
@@ -42,10 +68,12 @@ function App() {
 
   return (
 
-    <>
-      <NavbarTile />
-      <CardList list={list} />
-    </>
+
+    <RouterProvider router={router} />
+    // <>
+    //   <NavbarTile />
+    //   <CardList list={list} />
+    // </>
 
   )
 }

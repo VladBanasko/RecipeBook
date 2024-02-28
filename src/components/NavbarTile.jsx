@@ -11,6 +11,7 @@ const NavbarTile = () => {
         <p className="font-bold text-inherit max-w-fit">Recipe&DrinksBook</p>
       </NavbarBrand>
 
+      {/* Switch to change search from Drinks and Food API */}
       <Switch
         defaultSelected
         size="lg"

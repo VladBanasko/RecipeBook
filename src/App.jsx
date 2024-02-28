@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { About, HomeLayout, Error, Landing, Recipe } from './pages'
+import { About, HomeLayout, Error, Landing, Recipe, SinglePageError, Cocktail } from './pages'
 
 import './App.css'
 
@@ -10,6 +10,8 @@ import useFetchData from './utils/fetch'
 import axios from 'axios';
 import CardList from './components/CardList'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { loader as landingLoader } from './pages/Landing'
+
 
 const router = createBrowserRouter([
   {
@@ -19,7 +21,13 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        loader: landingLoader,
+        errorElement: <SinglePageError />,
         element: <Landing />
+      },
+      {
+        path: 'cocktail/:id',
+        element: <Cocktail />
       },
       {
         path: 'recipe',
@@ -37,8 +45,6 @@ const router = createBrowserRouter([
 function App() {
 
   // const { list } = useFetchData()
-
-
   // const options = {
   //   method: 'GET',
   //   url: 'https://recipe-by-api-ninjas.p.rapidapi.com/v1/recipe',
@@ -65,16 +71,12 @@ function App() {
   //   getData();
   // }, []);
 
-
   return (
-
-
     <RouterProvider router={router} />
     // <>
     //   <NavbarTile />
     //   <CardList list={list} />
     // </>
-
   )
 }
 

@@ -1,11 +1,27 @@
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Switch } from "@nextui-org/react";
+
+
+import Food from '../assets/restaurant.svg?react'
+import Drink from '../assets/cocktail.svg?react'
 
 const NavbarTile = () => {
   return (
-    <Navbar shouldHideOnScroll >
+    <Navbar shouldHideOnScroll isBordered >
       <NavbarBrand >
-        <p className="font-bold text-inherit max-w-fit">RecipeBook</p>
+        <p className="font-bold text-inherit max-w-fit">Recipe&DrinksBook</p>
       </NavbarBrand>
+
+      <Switch
+        defaultSelected
+        size="lg"
+        color="success"
+        startContent={<Food />}
+        endContent={<Drink />}
+      >
+        choose food or drink
+      </Switch>
+
+
       <NavbarContent className="hidden sm:flex gap-4" justify='center'>
         <NavbarItem isActive>
           <Link href="/" aria-current="page" color="foreground">
@@ -33,6 +49,7 @@ const NavbarTile = () => {
           </Button>
         </NavbarItem>
       </NavbarContent> */}
+
     </Navbar>
 
   )

@@ -84,8 +84,8 @@ const NavbarTile = () => {
                 Ordinary drink
               </DropdownItem>
               <DropdownItem
-                key="production_ready"
-                description="ACME runs on ACME, join us and others serving requests at web scale."
+                key="Shots"
+                description="Shots"
                 startContent={icons.flash}
               >
                 Production Ready

@@ -77,11 +77,11 @@ const NavbarTile = () => {
                 Cocktails
               </DropdownItem>
               <DropdownItem
-                key="usage_metrics"
-                description="Real-time metrics to debug issues. Slow query added? We’ll show you exactly where."
+                key="ordinary"
+                description="Ordinary drinks"
                 startContent={icons.activity}
               >
-                Usage Metrics
+                Ordinary drink
               </DropdownItem>
               <DropdownItem
                 key="production_ready"

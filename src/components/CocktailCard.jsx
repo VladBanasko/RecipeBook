@@ -1,7 +1,9 @@
 import { Card, CardFooter, Image } from "@nextui-org/react"
-import { Link } from "react-router-dom"
+import { Link, useOutletContext } from "react-router-dom"
 
 const CocktailCard = ({ image, id, name, info, glass }) => {
+
+  // const data = useOutletContext()
 
   return (
     <Card isFooterBlurred

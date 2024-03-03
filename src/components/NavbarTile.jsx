@@ -49,19 +49,19 @@ const NavbarTile = () => {
         </NavbarItem>
         <NavbarItem >
           <Dropdown>
-            <NavbarItem>
-              <DropdownTrigger>
-                <Button
-                  disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                  endContent={icons.chevron}
-                  radius="sm"
-                  variant="light"
-                >
-                  Categories
-                </Button>
-              </DropdownTrigger>
-            </NavbarItem>
+            {/* <NavbarItem> */}
+            <DropdownTrigger>
+              <Button
+                disableRipple
+                className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+                endContent={icons.chevron}
+                radius="sm"
+                variant="light"
+              >
+                Categories
+              </Button>
+            </DropdownTrigger>
+            {/* </NavbarItem> */}
             <DropdownMenu
               aria-label="ACME features"
               className="w-[340px]"
@@ -70,7 +70,7 @@ const NavbarTile = () => {
               }}
             >
               <DropdownItem
-                key="Cocktail"
+                key="Cocktails"
                 description="Cocktail drinks"
                 startContent={icons.scale}
               >

@@ -11,13 +11,6 @@ const cocktailSearchUrl =
 export const loader = async () => {
   const searchTerm = ''
   const response = await axios.get(`${cocktailSearchUrl}${searchTerm}`)
-  const cat = response.data.drinks.map((item) => {
-    return item.strCategory
-  })
-
-  const categ = new Set(cat)
-  console.log(response.data.drinks);
-  console.log(categ);
 
   return { drinks: response.data.drinks, searchTerm }
 }

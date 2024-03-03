@@ -8,6 +8,9 @@ const HomeLayout = () => {
   const navigation = useNavigation()
 
   const isPageLoading = navigation.state === 'loading'
+
+  const value = 'some value'
+
   return (
     <div>
       <NavbarTile />
@@ -21,7 +24,7 @@ const HomeLayout = () => {
             >Loading...</span>
           </div>
 
-          : <Outlet />}
+          : <Outlet context={{ value }} />}
 
       </section>
 

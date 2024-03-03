@@ -20,6 +20,8 @@ const Cocktail = () => {
   const { strDrink: name, strDrinkThumb: image, strAlcoholic: info, strCategory: category, strGlass: glass, strInstructions: instructions } = singleDrink
 
   return (
+
+    //  need to display content in two columns 
     <div className="min-h-screen grid-flow-row">
       <section className="">
         <Image src={image} className="w-full block object-cover"

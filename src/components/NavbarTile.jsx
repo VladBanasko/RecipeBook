@@ -1,12 +1,13 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Switch, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
 
 
+
 import Food from '../assets/restaurant.svg?react'
 import Drink from '../assets/cocktail.svg?react'
 
 
 import { ChevronDown, Lock, Activity, Flash, Server, TagUser, Scale } from "../assets/Icons";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const icons = {
   chevron: <ChevronDown fill="currentColor" size={16} />,
@@ -38,7 +39,9 @@ const NavbarTile = () => {
   return (
     <Navbar shouldHideOnScroll isBordered >
       <NavbarBrand >
-        <p className="font-bold text-inherit max-w-fit">Recipe&DrinksBook</p>
+        <Link href="/" className="text-slate-100">
+          <p className="font-bold text-inherit max-w-fit">Recipe&DrinksBook</p>
+        </Link>
       </NavbarBrand>
 
       {/* Switch to change search from Drinks and Food API */}
@@ -46,12 +49,12 @@ const NavbarTile = () => {
         <Switch
           defaultSelected
           size="lg"
-          color="success"
-          startContent={<Food />}
-          endContent={<Drink />}
-
+          color="secondary"
+          startContent={<Drink />}
+          endContent={<Food />}
+          className=""
         >
-          choose food or drink
+          drink or food
         </Switch></NavbarContent>
 
 

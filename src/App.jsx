@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { About, HomeLayout, Error, Landing, Recipe, SinglePageError, Cocktail } from './pages'
 
 import './App.css'
 
-import CardTile from './components/CardTile'
-import NavbarTile from './components/NavbarTile'
+
 import useFetchData from './utils/fetch'
-import axios from 'axios';
-import CardList from './components/CardList'
+
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { loader as landingLoader } from './pages/Landing'
 import { loader as singleCocktailLoader } from './pages/Cocktail'
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5
+    }
+  }
+})
 
 
 const router = createBrowserRouter([
@@ -22,14 +29,14 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: landingLoader,
+        loader: landingLoader(queryClient),
         errorElement: <SinglePageError />,
         element: <Landing />
       },
       {
         path: 'cocktail/:id',
         errorElement: <SinglePageError />,
-        loader: singleCocktailLoader,
+        loader: singleCocktailLoader(queryClient),
         element: <Cocktail />
       },
       {
@@ -75,7 +82,9 @@ function App() {
   // }, []);
 
   return (
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
     // <>
     //   <NavbarTile />
     //   <CardList list={list} />

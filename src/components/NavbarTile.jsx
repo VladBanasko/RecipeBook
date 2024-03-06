@@ -6,6 +6,7 @@ import Drink from '../assets/cocktail.svg?react'
 
 
 import { ChevronDown, Lock, Activity, Flash, Server, TagUser, Scale } from "../assets/Icons";
+import { useNavigate } from "react-router-dom";
 
 const icons = {
   chevron: <ChevronDown fill="currentColor" size={16} />,
@@ -17,6 +18,20 @@ const icons = {
   user: <TagUser className="text-danger" fill="currentColor" size={30} />,
 };
 
+
+// const navigate = useNavigate()
+
+const categorySelection = (category) => {
+
+  // <Navigate to={'/Landing'} category={category} />
+  // navigate('/Landing', { state: { category } })
+  console.log(category);
+
+  // implement navigate or fetch data according to chosen category 
+
+
+
+}
 
 
 const NavbarTile = () => {
@@ -34,6 +49,7 @@ const NavbarTile = () => {
           color="success"
           startContent={<Food />}
           endContent={<Drink />}
+
         >
           choose food or drink
         </Switch></NavbarContent>
@@ -68,16 +84,18 @@ const NavbarTile = () => {
               itemClasses={{
                 base: "gap-4",
               }}
+
+              onAction={(key) => categorySelection(key)}
             >
               <DropdownItem
                 key="Cocktails"
-                description="Cocktail drinks"
+                description="Cocktails drinks"
                 startContent={icons.scale}
               >
                 Cocktails
               </DropdownItem>
               <DropdownItem
-                key="ordinary"
+                key="Ordinary drinks"
                 description="Ordinary drinks"
                 startContent={icons.activity}
               >
@@ -88,21 +106,28 @@ const NavbarTile = () => {
                 description="Shots"
                 startContent={icons.flash}
               >
-                Production Ready
+                Shots
               </DropdownItem>
               <DropdownItem
-                key="99_uptime"
-                description="Applications stay on the grid with high availability and high uptime guarantees."
+                key="Punch / Party drinks"
+                description="Punch / Party drinks"
                 startContent={icons.server}
               >
-                +99% Uptime
+                Punch / Party Drinks
               </DropdownItem>
               <DropdownItem
-                key="supreme_support"
-                description="Overcome any challenge with a supporting team ready to respond."
+                key="Coffee / Tea"
+                description="Coffee / Tea"
                 startContent={icons.user}
               >
-                +Supreme Support
+                Coffee / Tea
+              </DropdownItem>
+              <DropdownItem
+                key="Beer"
+                description="Beer"
+                startContent={icons.user}
+              >
+                Beer
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>

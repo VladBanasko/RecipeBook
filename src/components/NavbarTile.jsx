@@ -55,7 +55,8 @@ const NavbarTile = () => {
           className=""
         >
           drink or food
-        </Switch></NavbarContent>
+        </Switch>
+      </NavbarContent>
 
 
       {/* add categories of drinks  */}

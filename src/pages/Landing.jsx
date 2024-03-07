@@ -21,6 +21,8 @@ const searchCocktailsQuery = (searchTerm) => {
   }
 }
 
+// add recipe end point and logic for switch 
+
 
 export const loader = (queryClient) => async ({ request }) => {
 

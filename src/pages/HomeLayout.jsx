@@ -1,11 +1,11 @@
 import NavbarTile from "../components/NavbarTile"
-import { Outlet, useNavigation } from "react-router-dom"
+import { Outlet, } from "react-router-dom"
 
 
 
 const HomeLayout = () => {
 
-  const navigation = useNavigation()
+
 
   const isPageLoading = navigation.state === 'loading'
   // const isPageLoading = 'true'
@@ -19,7 +19,6 @@ const HomeLayout = () => {
         {isPageLoading ?
           <div className="flex justify-center">
             <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-blue-600">
-
             </div>
           </div>
 

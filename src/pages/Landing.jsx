@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useLoaderData, useLocation } from "react-router-dom"
+import { useLoaderData } from "react-router-dom"
 import CocktailList from "../components/CocktailList";
 import SearchForm from "../components/SearchForm";
 import { useQuery } from "@tanstack/react-query";
 import { useGlobalContext } from "../context/context";
 
-const cocktailCategorySearch = 'www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail'
+const cocktailCategorySearch = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c='
 
 
 const cocktailSearchUrl =
@@ -22,20 +22,49 @@ const searchCocktailsQuery = (searchTerm) => {
   }
 }
 
-// add recipe end point and logic for switch 
+// search for category drinks
+const searchCocktailsCategoryQuery = (category) => {
+  return {
+    queryKey: ['filter', category],
+    queryFn: async () => {
+      const response = await axios.get(`${cocktailCategorySearch}${category}`)
+      console.log(response.data.drinks);
+      return response.data.drinks
+    }
+  }
+}
+
+// add recipe end point and logic for switch
 
 
+
+// find a way to pass search term and category 
 export const loader = (queryClient) => async ({ request }) => {
 
+
+  // const url = new URL(request.url)
+  // const searchTerm = url.searchParams.get('search') || ''
+  // await queryClient.ensureQueryData(searchCocktailsQuery(searchTerm))
+
   const url = new URL(request.url)
-  const searchTerm = url.searchParams.get('search') || ''
-  await queryClient.ensureQueryData(searchCocktailsQuery(searchTerm))
+  console.log(url);
+
+  // fild a way to pass category from category dropdown here 
+  const category = 'Shot'
+  await queryClient.ensureQueryData(searchCocktailsCategoryQuery(category))
+
 
   // const response = await axios.get(`${cocktailSearchUrl}${searchTerm}`)
 
   return {
     // drinks: response.data.drinks,
-    searchTerm
+
+
+
+    // searchTerm,
+
+
+    category
   }
 }
 
@@ -47,8 +76,13 @@ const Landing = () => {
 
   const {
     // drinks,
-    searchTerm } = useLoaderData()
+    searchTerm, category } = useLoaderData()
+
+  // find a way to decide which data to pass
+
   const { data: drinks } = useQuery(searchCocktailsQuery(searchTerm))
+
+  const { data: filteredDrinks } = useQuery(searchCocktailsCategoryQuery(category))
 
   // const { state } = useLocation()
   // const { category } = state
@@ -57,7 +91,8 @@ const Landing = () => {
   return (
     <>
       <SearchForm searchTerm={searchTerm} />
-      <CocktailList drinks={drinks} />
+      {/* <CocktailList drinks={drinks} /> */}
+      <CocktailList drinks={filteredDrinks} />
     </>
   )
 }

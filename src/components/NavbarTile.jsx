@@ -60,10 +60,6 @@ const NavbarTile = () => {
           drink or food
         </Switch>
       </NavbarContent>
-
-
-      {/* add categories of drinks  */}
-
       <NavbarContent className="hidden sm:flex gap-4" justify='center'>
         <NavbarItem isActive>
           <Link href="/" aria-current="page" color="foreground">
@@ -83,7 +79,8 @@ const NavbarTile = () => {
                 >
                   Categories
                 </Button>
-              </DropdownTrigger> :
+              </DropdownTrigger>
+              :
               <DropdownTrigger isDisabled>
                 <Button
                   disableRipple

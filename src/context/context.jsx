@@ -8,7 +8,7 @@ export const useGlobalContext = () => useContext(GlobalContext)
 
 const AppContext = ({ children }) => {
 
-  const [databaseSwitch, setDatabaseSwitch] = useState()
+  const [databaseSwitch, setDatabaseSwitch] = useState(true)
 
   return (
     <GlobalContext.Provider value={{ databaseSwitch, setDatabaseSwitch }} >{children}</GlobalContext.Provider>

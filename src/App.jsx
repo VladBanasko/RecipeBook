@@ -11,6 +11,7 @@ import useFetchData from './utils/fetch'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { loader as landingLoader } from './pages/Landing'
 import { loader as singleCocktailLoader } from './pages/Cocktail'
+import AppContext from './context/context'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -82,9 +83,11 @@ function App() {
   // }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <AppContext>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </AppContext>
     // <>
     //   <NavbarTile />
     //   <CardList list={list} />

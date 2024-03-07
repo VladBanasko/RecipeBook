@@ -1,13 +1,12 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Switch, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
 
-
-
 import Food from '../assets/restaurant.svg?react'
 import Drink from '../assets/cocktail.svg?react'
 
 
 import { ChevronDown, Lock, Activity, Flash, Server, TagUser, Scale } from "../assets/Icons";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/context";
 
 const icons = {
   chevron: <ChevronDown fill="currentColor" size={16} />,
@@ -19,23 +18,26 @@ const icons = {
   user: <TagUser className="text-danger" fill="currentColor" size={30} />,
 };
 
+export
 
-// const navigate = useNavigate()
+  // const navigate = useNavigate()
 
-const categorySelection = (category) => {
+  const categorySelection = (category) => {
 
-  // <Navigate to={'/Landing'} category={category} />
-  // navigate('/Landing', { state: { category } })
-  console.log(category);
+    // <Navigate to={'/Landing'} category={category} />
+    // navigate('/Landing', { state: { category } })
+    console.log(category);
 
-  // implement navigate or fetch data according to chosen category 
+    // implement navigate or fetch data according to chosen category 
 
 
 
-}
+  }
 
 
 const NavbarTile = () => {
+
+  const { databaseSwitch, setDatabaseSwitch } = useGlobalContext()
   return (
     <Navbar shouldHideOnScroll isBordered >
       <NavbarBrand >
@@ -53,6 +55,7 @@ const NavbarTile = () => {
           startContent={<Drink />}
           endContent={<Food />}
           className=""
+          onChange={(event) => setDatabaseSwitch(event.target.checked)}
         >
           drink or food
         </Switch>
@@ -68,19 +71,31 @@ const NavbarTile = () => {
           </Link>
         </NavbarItem>
         <NavbarItem >
-          <Dropdown>
-            {/* <NavbarItem> */}
-            <DropdownTrigger>
-              <Button
-                disableRipple
-                className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                endContent={icons.chevron}
-                radius="sm"
-                variant="light"
-              >
-                Categories
-              </Button>
-            </DropdownTrigger>
+          <Dropdown >
+            {databaseSwitch ?
+              <DropdownTrigger >
+                <Button
+                  disableRipple
+                  className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+                  endContent={icons.chevron}
+                  radius="sm"
+                  variant="light"
+                >
+                  Categories
+                </Button>
+              </DropdownTrigger> :
+              <DropdownTrigger isDisabled>
+                <Button
+                  disableRipple
+                  className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+                  endContent={icons.chevron}
+                  radius="sm"
+                  variant="light"
+                >
+                  Categories
+                </Button>
+              </DropdownTrigger>}
+
             {/* </NavbarItem> */}
             <DropdownMenu
               aria-label="ACME features"
@@ -153,7 +168,7 @@ const NavbarTile = () => {
         </NavbarItem>
       </NavbarContent> */}
 
-    </Navbar>
+    </Navbar >
 
   )
 }

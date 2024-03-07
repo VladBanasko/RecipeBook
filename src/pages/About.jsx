@@ -1,7 +1,10 @@
 import { Link } from "@nextui-org/react"
 import NavbarTile from "../components/NavbarTile"
 
+
 const About = () => {
+
+
   return (
     <div className="min-h-screen">
       <h1 className='text-start text-3xl capitalize'>About us</h1>

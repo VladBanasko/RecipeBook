@@ -3,6 +3,7 @@ import { useLoaderData, useLocation } from "react-router-dom"
 import CocktailList from "../components/CocktailList";
 import SearchForm from "../components/SearchForm";
 import { useQuery } from "@tanstack/react-query";
+import { useGlobalContext } from "../context/context";
 
 const cocktailCategorySearch = 'www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail'
 
@@ -40,6 +41,9 @@ export const loader = (queryClient) => async ({ request }) => {
 
 
 const Landing = () => {
+
+  const { databaseSwitch } = useGlobalContext()
+
 
   const {
     // drinks,

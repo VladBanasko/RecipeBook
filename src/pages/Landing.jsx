@@ -5,8 +5,10 @@ import SearchForm from "../components/SearchForm";
 import { useQuery } from "@tanstack/react-query";
 import { useGlobalContext } from "../context/context";
 
-const cocktailCategorySearch = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c='
 
+
+const cocktailCategorySearch =
+  'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c='
 
 const cocktailSearchUrl =
   'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';

@@ -37,6 +37,7 @@ export
 
 const NavbarTile = () => {
 
+  // var to control categories navbar dropdown 
   const { databaseSwitch, setDatabaseSwitch } = useGlobalContext()
   return (
     <Navbar shouldHideOnScroll isBordered >

@@ -4,6 +4,7 @@ import CocktailList from "../components/CocktailList";
 import SearchForm from "../components/SearchForm";
 import { useQuery } from "@tanstack/react-query";
 import { useGlobalContext } from "../context/context";
+import useFetchData from "../utils/fetch";
 
 
 
@@ -39,7 +40,7 @@ const searchCocktailsCategoryQuery = (category) => {
   }
 }
 
-// add recipe end point and logic for switch
+// add recipe end point and logic for switch!!
 
 
 
@@ -59,12 +60,9 @@ export const loader = (queryClient) => async ({ request }) => {
   await queryClient.ensureQueryData(searchCocktailsCategoryQuery(category))
 
 
+
+
   return { searchTerm, category }
-
-
-  // fild a way to pass category from category dropdown here 
-
-
 
   // const response = await axios.get(`${cocktailSearchUrl}${searchTerm}`)
 
@@ -82,6 +80,8 @@ export const loader = (queryClient) => async ({ request }) => {
 const Landing = () => {
 
   const { databaseSwitch, drinkCategory, searchSwitch } = useGlobalContext()
+
+
 
   const {
     // drinks,

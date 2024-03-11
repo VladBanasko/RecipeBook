@@ -14,6 +14,9 @@ const cocktailSearchUrl =
   'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
 
+
+
+
 const searchCocktailsQuery = (searchTerm) => {
   return {
     queryKey: ['search', searchTerm || 'all'],
@@ -30,7 +33,7 @@ const searchCocktailsCategoryQuery = (category) => {
     queryKey: ['filter', category],
     queryFn: async () => {
       const response = await axios.get(`${cocktailCategorySearch}${category}`)
-      console.log(response.data.drinks);
+      // console.log(response.data.drinks);
       return response.data.drinks
     }
   }
@@ -44,57 +47,62 @@ const searchCocktailsCategoryQuery = (category) => {
 export const loader = (queryClient) => async ({ request }) => {
 
 
-  // const url = new URL(request.url)
-  // const searchTerm = url.searchParams.get('search') || ''
-  // await queryClient.ensureQueryData(searchCocktailsQuery(searchTerm))
 
   const url = new URL(request.url)
-  console.log(url);
+  const searchTerm = url.searchParams.get('search') || ''
+  await queryClient.ensureQueryData(searchCocktailsQuery(searchTerm))
+
+
+
+  const category = 'Cocktail'
+
+  await queryClient.ensureQueryData(searchCocktailsCategoryQuery(category))
+
+
+  return { searchTerm, category }
+
 
   // fild a way to pass category from category dropdown here 
-  const category = 'Shot'
-  await queryClient.ensureQueryData(searchCocktailsCategoryQuery(category))
+
 
 
   // const response = await axios.get(`${cocktailSearchUrl}${searchTerm}`)
 
-  return {
-    // drinks: response.data.drinks,
+  // return {
+  //   // drinks: response.data.drinks,
+
+  //   // searchTerm,
 
 
-
-    // searchTerm,
-
-
-    category
-  }
+  //   // category
+  // }
 }
 
 
 const Landing = () => {
 
-  const { databaseSwitch } = useGlobalContext()
-
+  const { databaseSwitch, drinkCategory, searchSwitch } = useGlobalContext()
 
   const {
     // drinks,
-    searchTerm, category } = useLoaderData()
+    searchTerm } = useLoaderData()
 
   // find a way to decide which data to pass
 
   const { data: drinks } = useQuery(searchCocktailsQuery(searchTerm))
 
-  const { data: filteredDrinks } = useQuery(searchCocktailsCategoryQuery(category))
+  const { data: filteredDrinks } = useQuery(searchCocktailsCategoryQuery(drinkCategory))
 
   // const { state } = useLocation()
   // const { category } = state
-  // console.log(category);
+  // console.log(drinks);
+  // console.log(filteredDrinks);
 
   return (
     <>
       <SearchForm searchTerm={searchTerm} />
       {/* <CocktailList drinks={drinks} /> */}
-      <CocktailList drinks={filteredDrinks} />
+      <CocktailList drinks={searchSwitch ? drinks : filteredDrinks} />
     </>
   )
 }

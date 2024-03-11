@@ -22,140 +22,146 @@ export
 
   // const navigate = useNavigate()
 
-  const categorySelection = (category) => {
-
-    // <Navigate to={'/Landing'} category={category} />
-    // navigate('/Landing', { state: { category } })
-    console.log(category);
-
-    // implement navigate or fetch data according to chosen category 
 
 
 
-  }
+  const NavbarTile = () => {
+
+    // var to control categories navbar dropdown 
+    const { databaseSwitch, setDatabaseSwitch, setDrinkCategory, setSearchSwitch } = useGlobalContext()
+
+    const navigate = useNavigate()
 
 
-const NavbarTile = () => {
+    const categorySelection = (category) => {
+      setDrinkCategory(category)
+      setSearchSwitch(false)
+      navigate('/')
 
-  // var to control categories navbar dropdown 
-  const { databaseSwitch, setDatabaseSwitch } = useGlobalContext()
-  return (
-    <Navbar shouldHideOnScroll isBordered >
-      <NavbarBrand >
-        <Link href="/" className="text-slate-100">
-          <p className="font-bold text-inherit max-w-fit">Recipe&DrinksBook</p>
-        </Link>
-      </NavbarBrand>
+    }
 
-      {/* Switch to change search from Drinks and Food API */}
-      <NavbarContent className="justify-center capitalize">
-        <Switch
-          defaultSelected
-          size="lg"
-          color="secondary"
-          startContent={<Drink />}
-          endContent={<Food />}
-          className=""
-          onChange={(event) => setDatabaseSwitch(event.target.checked)}
-        >
-          drink or food
-        </Switch>
-      </NavbarContent>
-      <NavbarContent className="hidden sm:flex gap-4" justify='center'>
-        <NavbarItem isActive>
-          <Link href="/" aria-current="page" color="foreground">
-            All
+    return (
+      <Navbar shouldHideOnScroll isBordered >
+        <NavbarBrand >
+          <Link href="/" className="text-slate-100">
+            <p className="font-bold text-inherit max-w-fit">Recipe&DrinksBook</p>
           </Link>
-        </NavbarItem>
-        <NavbarItem >
-          <Dropdown >
-            {databaseSwitch ?
-              <DropdownTrigger >
-                <Button
-                  disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                  endContent={icons.chevron}
-                  radius="sm"
-                  variant="light"
-                >
-                  Categories
-                </Button>
-              </DropdownTrigger>
-              :
-              <DropdownTrigger isDisabled>
-                <Button
-                  disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                  endContent={icons.chevron}
-                  radius="sm"
-                  variant="light"
-                >
-                  Categories
-                </Button>
-              </DropdownTrigger>}
+        </NavbarBrand>
 
-            {/* </NavbarItem> */}
-            <DropdownMenu
-              aria-label="ACME features"
-              className="w-[340px]"
-              itemClasses={{
-                base: "gap-4",
-              }}
+        {/* Switch to change search from Drinks and Food API */}
+        <NavbarContent className="justify-center capitalize">
+          <Switch
+            defaultSelected
+            size="lg"
+            color="secondary"
+            startContent={<Drink />}
+            endContent={<Food />}
+            className=""
+            onChange={(event) => setDatabaseSwitch(event.target.checked)}
+          >
+            drink or food
+          </Switch>
+        </NavbarContent>
+        <NavbarContent className="hidden sm:flex gap-4" justify='center'>
+          <NavbarItem isActive>
+            <Link href="/" aria-current="page" color="foreground">
+              All
+            </Link>
+          </NavbarItem>
+          <NavbarItem >
+            <Dropdown >
+              {databaseSwitch ?
+                <DropdownTrigger >
+                  <Button
+                    disableRipple
+                    className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+                    endContent={icons.chevron}
+                    radius="sm"
+                    variant="light"
+                  >
+                    Categories
+                  </Button>
+                </DropdownTrigger>
+                :
+                <DropdownTrigger isDisabled>
+                  <Button
+                    disableRipple
+                    className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+                    endContent={icons.chevron}
+                    radius="sm"
+                    variant="light"
+                  >
+                    Categories
+                  </Button>
+                </DropdownTrigger>}
 
-              onAction={(key) => categorySelection(key)}
-            >
-              <DropdownItem
-                key="Cocktails"
-                description="Cocktails drinks"
-                startContent={icons.scale}
+              {/* </NavbarItem> */}
+              <DropdownMenu
+                aria-label="ACME features"
+                className="w-[340px]"
+                itemClasses={{
+                  base: "gap-4",
+                }}
+
+                onAction={(key) => {
+                  categorySelection(key)
+
+                }}
+
+
               >
-                Cocktails
-              </DropdownItem>
-              <DropdownItem
-                key="Ordinary drinks"
-                description="Ordinary drinks"
-                startContent={icons.activity}
-              >
-                Ordinary drink
-              </DropdownItem>
-              <DropdownItem
-                key="Shots"
-                description="Shots"
-                startContent={icons.flash}
-              >
-                Shots
-              </DropdownItem>
-              <DropdownItem
-                key="Punch / Party drinks"
-                description="Punch / Party drinks"
-                startContent={icons.server}
-              >
-                Punch / Party Drinks
-              </DropdownItem>
-              <DropdownItem
-                key="Coffee / Tea"
-                description="Coffee / Tea"
-                startContent={icons.user}
-              >
-                Coffee / Tea
-              </DropdownItem>
-              <DropdownItem
-                key="Beer"
-                description="Beer"
-                startContent={icons.user}
-              >
-                Beer
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="/about">
-            About
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-      {/* <NavbarContent justify="end">
+                <DropdownItem
+                  key="Cocktail"
+                  description="Cocktails drinks"
+                  startContent={icons.scale}
+                >
+                  Cocktails
+                </DropdownItem>
+                <DropdownItem
+                  key="Ordinary Drink"
+                  description="Ordinary drinks"
+                  startContent={icons.activity}
+                >
+                  Ordinary drink
+                </DropdownItem>
+                <DropdownItem
+                  key="Shot"
+                  description="Shots"
+                  startContent={icons.flash}
+                >
+                  Shots
+                </DropdownItem>
+                <DropdownItem
+                  key="Punch / Party Drink"
+                  description="Punch / Party drinks"
+                  startContent={icons.server}
+                >
+                  Punch / Party Drinks
+                </DropdownItem>
+                <DropdownItem
+                  key="Coffee / Tea"
+                  description="Coffee / Tea"
+                  startContent={icons.user}
+                >
+                  Coffee / Tea
+                </DropdownItem>
+                <DropdownItem
+                  key="Beer"
+                  description="Beer"
+                  startContent={icons.user}
+                >
+                  Beer
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </NavbarItem>
+          <NavbarItem>
+            <Link color="foreground" href="/about">
+              About
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+        {/* <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
           <Link href="#">Login</Link>
         </NavbarItem>
@@ -166,8 +172,8 @@ const NavbarTile = () => {
         </NavbarItem>
       </NavbarContent> */}
 
-    </Navbar >
+      </Navbar >
 
-  )
-}
+    )
+  }
 export default NavbarTile

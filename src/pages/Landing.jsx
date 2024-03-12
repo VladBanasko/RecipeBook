@@ -4,7 +4,7 @@ import CocktailList from "../components/CocktailList";
 import SearchForm from "../components/SearchForm";
 import { useQuery } from "@tanstack/react-query";
 import { useGlobalContext } from "../context/context";
-import useFetchData from "../utils/fetch";
+
 
 
 
@@ -28,6 +28,8 @@ const searchCocktailsQuery = (searchTerm) => {
   }
 }
 
+
+
 // search for category drinks
 const searchCocktailsCategoryQuery = (category) => {
   return {
@@ -36,6 +38,23 @@ const searchCocktailsCategoryQuery = (category) => {
       const response = await axios.get(`${cocktailCategorySearch}${category}`)
       // console.log(response.data.drinks);
       return response.data.drinks
+    }
+  }
+}
+
+
+const searchFoodQuery = (searchTerm) => {
+  return {
+    queryKey: ['meal', searchTerm || 'all'],
+    queryFn: async () => {
+      const response = await axios.request({
+        url: 'https://recipe-by-api-ninjas.p.rapidapi.com/v1/recipe', method: 'GET', headers: {
+          'X-RapidAPI-Key': '2756518c16msh4a2d7cb476360ecp1c9bedjsn2f91e91e44e0',
+          'X-RapidAPI-Host': 'recipe-by-api-ninjas.p.rapidapi.com'
+        }, params: { query: `${searchTerm}` }
+      })
+      return response.data
+
     }
   }
 }
@@ -53,16 +72,14 @@ export const loader = (queryClient) => async ({ request }) => {
   const searchTerm = url.searchParams.get('search') || ''
   await queryClient.ensureQueryData(searchCocktailsQuery(searchTerm))
 
-
-
   const category = 'Cocktail'
-
   await queryClient.ensureQueryData(searchCocktailsCategoryQuery(category))
 
 
+  const food = await queryClient.ensureQueryData(searchFoodQuery(searchTerm))
 
+  return { searchTerm, category, food }
 
-  return { searchTerm, category }
 
   // const response = await axios.get(`${cocktailSearchUrl}${searchTerm}`)
 
@@ -81,22 +98,23 @@ const Landing = () => {
 
   const { databaseSwitch, drinkCategory, searchSwitch } = useGlobalContext()
 
-
-
   const {
     // drinks,
     searchTerm } = useLoaderData()
 
   // find a way to decide which data to pass
 
-  const { data: drinks } = useQuery(searchCocktailsQuery(searchTerm))
+  // const { data: drinks } = useQuery(searchCocktailsQuery(searchTerm))
 
   const { data: filteredDrinks } = useQuery(searchCocktailsCategoryQuery(drinkCategory))
+  const { data: food } = useQuery(searchFoodQuery(searchTerm))
 
   // const { state } = useLocation()
   // const { category } = state
   // console.log(drinks);
   // console.log(filteredDrinks);
+  // const eat = useFetchData()
+
 
   return (
     <>

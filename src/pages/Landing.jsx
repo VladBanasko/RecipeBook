@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useLoaderData } from "react-router-dom"
 import CocktailList from "../components/CocktailList";
+import FoodList from "../components/FoodList";
 import SearchForm from "../components/SearchForm";
 import { useQuery } from "@tanstack/react-query";
 import { useGlobalContext } from "../context/context";
@@ -120,7 +121,9 @@ const Landing = () => {
     <>
       <SearchForm searchTerm={searchTerm} />
       {/* <CocktailList drinks={drinks} /> */}
-      <CocktailList drinks={searchSwitch ? drinks : filteredDrinks} />
+
+      {databaseSwitch ? <CocktailList drinks={searchSwitch ? drinks : filteredDrinks} /> : <FoodList food={food} />}
+      {/* <CocktailList drinks={searchSwitch ? drinks : filteredDrinks} /> */}
     </>
   )
 }

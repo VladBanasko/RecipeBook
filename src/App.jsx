@@ -6,7 +6,7 @@ import { About, HomeLayout, Error, Landing, Recipe, SinglePageError, Cocktail } 
 import './App.css'
 
 
-import useFetchData from './utils/fetch'
+// import useFetchData from './utils/fetch'
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { loader as landingLoader } from './pages/Landing'

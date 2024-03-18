@@ -29,8 +29,6 @@ const searchCocktailsQuery = (searchTerm) => {
   }
 }
 
-
-
 // search for category drinks
 const searchCocktailsCategoryQuery = (category) => {
   return {
@@ -43,7 +41,6 @@ const searchCocktailsCategoryQuery = (category) => {
   }
 }
 
-
 const searchFoodQuery = (searchTerm) => {
   return {
     queryKey: ['meal', searchTerm || 'all'],
@@ -54,6 +51,7 @@ const searchFoodQuery = (searchTerm) => {
           'X-RapidAPI-Host': 'recipe-by-api-ninjas.p.rapidapi.com'
         }, params: { query: `${searchTerm}` }
       })
+
       return response.data
 
     }
@@ -77,9 +75,12 @@ export const loader = (queryClient) => async ({ request }) => {
   await queryClient.ensureQueryData(searchCocktailsCategoryQuery(category))
 
 
-  const food = await queryClient.ensureQueryData(searchFoodQuery(searchTerm))
+  const food = await queryClient.ensureQueryData(searchFoodQuery(searchTerm ? searchTerm : 'all'))
 
-  return { searchTerm, category, food }
+  return {
+    searchTerm, category,
+    food
+  }
 
 
   // const response = await axios.get(`${cocktailSearchUrl}${searchTerm}`)
@@ -105,16 +106,13 @@ const Landing = () => {
 
   // find a way to decide which data to pass
 
-  // const { data: drinks } = useQuery(searchCocktailsQuery(searchTerm))
+
+  const { data: drinks } = useQuery(searchCocktailsQuery(searchTerm))
 
   const { data: filteredDrinks } = useQuery(searchCocktailsCategoryQuery(drinkCategory))
-  const { data: food } = useQuery(searchFoodQuery(searchTerm))
 
-  // const { state } = useLocation()
-  // const { category } = state
-  // console.log(drinks);
-  // console.log(filteredDrinks);
-  // const eat = useFetchData()
+
+  const { data: food } = useQuery(searchFoodQuery(searchTerm))
 
 
   return (
@@ -123,6 +121,7 @@ const Landing = () => {
       {/* <CocktailList drinks={drinks} /> */}
 
       {databaseSwitch ? <CocktailList drinks={searchSwitch ? drinks : filteredDrinks} /> : <FoodList food={food} />}
+
       {/* <CocktailList drinks={searchSwitch ? drinks : filteredDrinks} /> */}
     </>
   )

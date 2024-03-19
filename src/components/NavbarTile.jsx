@@ -69,6 +69,8 @@ export
             </Link>
           </NavbarItem>
           <NavbarItem >
+
+            {/* add classes to make dropdown dark color */}
             <Dropdown >
               {databaseSwitch ?
                 <DropdownTrigger >

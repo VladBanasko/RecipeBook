@@ -8,6 +8,8 @@ const FoodList = ({ food }) => {
 
   const [foodMeal, setFoodMeal] = useState({})
 
+  // maybe add some image random 
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-4 gap-8 ">
       {food.map((item) => {

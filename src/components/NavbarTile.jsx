@@ -20,10 +20,6 @@ const icons = {
 
 export
 
-  // const navigate = useNavigate()
-
-
-
 
   const NavbarTile = () => {
 

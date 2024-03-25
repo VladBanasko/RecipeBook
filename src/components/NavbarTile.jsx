@@ -66,7 +66,7 @@ export
           </NavbarItem>
           <NavbarItem >
 
-            {/* add classes to make dropdown dark color please do this today */}
+            {/* add classes to make dropdown dark color please do this asap */}
             <Dropdown >
               {databaseSwitch ?
                 <DropdownTrigger >

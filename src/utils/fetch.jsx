@@ -10,8 +10,8 @@ const options = {
     query: ''
   },
   headers: {
-    // 'X-RapidAPI-Key': '2756518c16msh4a2d7cb476360ecp1c9bedjsn2f91e91e44e0',
-    'X-RapidAPI-Key': 'iCbLCOwlJnd1+iHDCUGLyg==EmgyDbmtNbgEzmg7',
+    'X-RapidAPI-Key': '2756518c16msh4a2d7cb476360ecp1c9bedjsn2f91e91e44e0',
+    // 'X-RapidAPI-Key': 'iCbLCOwlJnd1+iHDCUGLyg==EmgyDbmtNbgEzmg7',
     'X-RapidAPI-Host': 'recipe-by-api-ninjas.p.rapidapi.com'
   }
 };

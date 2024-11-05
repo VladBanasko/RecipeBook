@@ -6,7 +6,10 @@ const FoodList = ({ food }) => {
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+
+
   const [foodMeal, setFoodMeal] = useState({})
+  // const [foodMeal, setFoodMeal] = useState([])
 
   // maybe add some image random 
 

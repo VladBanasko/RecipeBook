@@ -43,6 +43,7 @@ const useFetchData = () => {
         return { title, ingredients, instructions, servings }
       })
       // console.log(results);
+
       setList(results)
 
       // console.log(response.data);

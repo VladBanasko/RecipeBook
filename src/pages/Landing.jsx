@@ -15,18 +15,36 @@ const cocktailCategorySearch =
 const cocktailSearchUrl =
   'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
+const cocktailsLetterAUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a'
 
 
 
 
 const searchCocktailsQuery = (searchTerm) => {
+
+  if (searchTerm == '') {
+    return {
+
+      queryFn: async () => {
+        const response = await axios.get(`${cocktailSearchUrl}vodka`)
+        // console.log("Cocktails Search Response:", response.data);
+
+        return response.data.drinks
+      }
+    }
+  }
+
   return {
-    queryKey: ['search', searchTerm || 'all'],
+    queryKey: ['search', searchTerm || ''],
+
     queryFn: async () => {
       const response = await axios.get(`${cocktailSearchUrl}${searchTerm}`)
+      // console.log("Cocktails Search Response:", response.data);
+
       return response.data.drinks
     }
   }
+
 }
 
 // search for category drinks
@@ -35,7 +53,6 @@ const searchCocktailsCategoryQuery = (category) => {
     queryKey: ['filter', category],
     queryFn: async () => {
       const response = await axios.get(`${cocktailCategorySearch}${category}`)
-      // console.log(response.data.drinks);
       return response.data.drinks
     }
   }
@@ -77,6 +94,7 @@ export const loader = (queryClient) => async ({ request }) => {
 
   const food = await queryClient.ensureQueryData(searchFoodQuery(searchTerm ? searchTerm : 'all'))
 
+
   return {
     searchTerm, category,
     food
@@ -110,9 +128,11 @@ const Landing = () => {
   const { data: drinks } = useQuery(searchCocktailsQuery(searchTerm))
 
   const { data: filteredDrinks } = useQuery(searchCocktailsCategoryQuery(drinkCategory))
-
-
   const { data: food } = useQuery(searchFoodQuery(searchTerm))
+
+  console.log("Drinks Data:", drinks);
+  // console.log("Filtered Drinks Data:", filteredDrinks);
+  // console.log("Food Data:", food);
 
 
   return (
